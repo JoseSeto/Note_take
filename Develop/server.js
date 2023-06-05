@@ -1,6 +1,7 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
+var uniqid = require('uniqid');
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -11,7 +12,7 @@ app.use(express.static('public'));
 
 //API routes
 app.get('/api/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, '../db/db.json'));
+  res.sendFile(path.join(__dirname, '/db/db.json'));
 });
 
 app.post('/api/notes', (req, res) => {
@@ -45,11 +46,11 @@ app.delete('/api/notes/:id', (req, res) => {
 
 // HTML routes
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../index.html'));
+    res.sendFile(path.join(__dirname, '/public/index.html'));
   });
   
   app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../notes.html'));
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
   });
   
   app.listen(PORT, () => {
