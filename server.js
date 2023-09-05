@@ -12,11 +12,11 @@ app.use(express.static('public'));
 
 //API routes
 app.get('/api/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, '/db/db.json'));
+  res.sendFile(path.join(__dirname, 'Develop/db/db.json'));
 });
 
 app.post('/api/notes', (req, res) => {
-  let db = fs.readFileSync('db/db.json');
+  let db = fs.readFileSync('Develop/db/db.json');
   db = JSON.parse(db);
   res.json(db);
   // creating body for note
@@ -27,19 +27,19 @@ app.post('/api/notes', (req, res) => {
     id: uniqid(),
   };
   // pushing created note to be written in the db.json file
-  db.push(userNote);
-  fs.writeFileSync('db/db.json', JSON.stringify(db));
+  db.push(userNote);2
+  fs.writeFileSync('Develop/db/db.json', JSON.stringify(db));
   res.json(db);
 
 });
 
 app.delete('/api/notes/:id', (req, res) => {
   // reading notes form db.json
-  let db = JSON.parse(fs.readFileSync('db/db.json'))
+  let db = JSON.parse(fs.readFileSync('Develop/db/db.json'))
   // removing note with id
   let deleteNotes = db.filter(item => item.id !== req.params.id);
   // Rewriting note to db.json
-  fs.writeFileSync('db/db.json', JSON.stringify(deleteNotes));
+  fs.writeFileSync('Develop/db/db.json', JSON.stringify(deleteNotes));
   res.json(deleteNotes);
   
 })
